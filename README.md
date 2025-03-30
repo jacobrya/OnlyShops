@@ -20,8 +20,8 @@ OnlyShops is an online marketplace that allows users to browse, purchase, and ma
 
 ### Clone the repository:
 ```sh
-git clone https://github.com/yourusername/onlyshops.git
-cd onlyshops
+git clone https://github.com/jacobrya/OnlyShops.git
+cd OnlyShops
 ```
 
 ### Set up the backend:
