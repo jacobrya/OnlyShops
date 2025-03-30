@@ -1,1 +1,3 @@
 # OnlyShops
+
+![logo](logo.png)
