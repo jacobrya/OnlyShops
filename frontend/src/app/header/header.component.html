@@ -1,0 +1,15 @@
+<header>
+    <h2>
+        <ng-container *ngIf="isLoggedIn; else noUser">
+            <a routerLink="/">
+                <strong>Shop</strong>
+            </a>
+        </ng-container>
+
+        <ng-template #noUser>
+            <strong>Shop</strong>
+        </ng-template>
+    </h2>
+
+    <button *ngIf="isLoggedIn" (click)="logOut()" type="button">Log Out</button>
+</header>
