@@ -82,6 +82,13 @@ WSGI_APPLICATION = 'onlyshops.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: v.split(','))
+
+STATIC_URL = '/static/'  # URL для доступа к статикам
+STATIC_ROOT = '/app/onlyshops/static'  # Папка для статики внутри контейнера
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
