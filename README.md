@@ -28,8 +28,18 @@ cd OnlyShops
 ```sh
 cd backend
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -r requirements.txt
+source venv/bin/activate  # On Windows: myenv\Scripts\activate
+pip install -r onlyshops/requirments.txt
+
+Add a .env file to the root directory and include the following:
+
+DATABASE_NAME=
+DATABASE_USER=
+DATABASE_PASSWORD=
+DATABASE_HOST=
+DATABASE_PORT=
+API_SECRET_KEY=
+
 python manage.py migrate
 python manage.py runserver
 ```
