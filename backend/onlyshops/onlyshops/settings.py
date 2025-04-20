@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'api'
+    
 
 ]
 
@@ -147,3 +149,5 @@ CORS_ALLOW_ALL_ORIGINS = True  # For development only
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
 ]
+
+AUTH_USER_MODEL = 'api.User'
