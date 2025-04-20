@@ -1,8 +1,18 @@
 from django.urls import path
-from .views import register, login, protected_view
+from .views import *
 
 urlpatterns = [
-    path('auth/register/', register, name='register'),
-    path('auth/login/', login, name='login'),
-    path('protected/', protected_view, name='protected_view'),
+    path('auth/register/', RegisterView.as_view(), name='register'),
+    path('auth/login/', LoginView.as_view(), name='login'),
+    path('auth/refresh/', RefreshTokenView.as_view(), name='refresh'),
+    path('categories/', CategoryListCreateView.as_view(), name='category-list'),
+    path('categories/<int:pk>/', CategoryDetailView.as_view(), name='category-detail'),
+    path('products/', ProductListCreateView.as_view(), name='product-list'),
+    path('products/<int:pk>/', ProductDetailView.as_view(), name='product-detail'),
+    path('cart/', CartView.as_view(), name='cart'),
+    path('orders/', OrderListView.as_view(), name='order-list'),
+    path('orders/create/', OrderCreateView.as_view(), name='order-create'),
+    path('orders/<int:pk>/', OrderDetailView.as_view(), name='order-detail'),
+    path('user-orders/', UserOrdersView.as_view(), name='user-orders'),
+    path('orders/<int:pk>/action/', OrderActionView.as_view(), name='order-action'),
 ]

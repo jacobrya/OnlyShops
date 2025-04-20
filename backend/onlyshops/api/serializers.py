@@ -1,45 +1,30 @@
 from rest_framework import serializers
-from .models import User, Category, Product
+from .models import *
 from django.contrib.auth.password_validation import validate_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, validators=[validate_password])
 
-    role = serializers.ChoiceField(choices=[('user', 'User'), ('seller', 'Seller')], default='user')  # только user и seller
-
     class Meta:
         model = User
-        fields = ['username', 'email', 'password', 'role']
-    
+        fields = ['username', 'email', 'password']
+
     def validate_email(self, value):
-            if User.objects.filter(email=value).exists():
-                raise serializers.ValidationError("This email is already in use.")
-            return value
-    
+        if User.objects.filter(email=value).exists():
+            raise serializers.ValidationError("This email is already in use.")
+        return value
+
     def create(self, validated_data):
-        role = validated_data.get('role')
-        if role == 'admin':
-            raise serializers.ValidationError("какой из тебя админ lmao!")
-        
         user = User.objects.create_user(
             username=validated_data['username'],
             email=validated_data['email'],
-            password=validated_data['password'],
-            role=role
+            password=validated_data['password']
         )
         return user
 
-class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
-    @classmethod
-    def get_token(cls, user):
-        token = super().get_token(user)
-        token['role'] = user.role
-        return token
-
-    def validate(self, attrs):
-        data = super().validate(attrs)
-        data['role'] = self.user.role
-        return data
+class LoginSerializer(TokenObtainPairSerializer):
+    pass
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -47,29 +32,45 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ['id', 'name']
 
 class ProductSerializer(serializers.ModelSerializer):
+    category = CategorySerializer(read_only=True)
+    seller = serializers.StringRelatedField(read_only=True)
+    category_id = serializers.PrimaryKeyRelatedField(
+            queryset=Category.objects.all(), source='category', write_only=True
+        )
     class Meta:
         model = Product
-        fields = ['id', 'title', 'description', 'price', 'image_url', 'stock', 'category', 'seller', 'created_at']
+        fields = ['id', 'title', 'description', 'price', 'image_url', 'stock', 'category', 'category_id', 'seller', 'created_at']
+        read_only_fields = ['seller', 'created_at']
 
-# class CategorySerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Category
-#         fields = '__all__'
+class CartSerializer(serializers.ModelSerializer):
+    product = ProductSerializer(read_only=True)
+    product_id = serializers.PrimaryKeyRelatedField(
+        queryset=Product.objects.all(), source='product', write_only=True
+    )
 
-# class ProductSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Product
-#         fields = '__all__'
+    class Meta:
+        model = Cart
+        fields = ['id', 'user', 'product', 'product_id', 'quantity']
+        read_only_fields = ['user', 'product']
 
-# class CustomerSerializer(serializers.Serializer):
-#     id = serializers.IntegerField(read_only=True)
-#     phone = serializers.CharField()
-#     address = serializers.CharField()
+    def validate(self, data):
+        request = self.context.get('request')
+        if request and request.user == data['product'].seller:
+            raise serializers.ValidationError("You cannot add your own product to the cart.")
+        return data
 
-# class OrderSerializer(serializers.Serializer):
-#     id = serializers.IntegerField(read_only=True)
-#     customer = serializers.PrimaryKeyRelatedField(queryset=Customer.objects.all())
-#     created_at = serializers.DateTimeField(read_only=True)
-#     status = serializers.CharField()
+class OrderItemSerializer(serializers.ModelSerializer):
+    product = ProductSerializer(read_only=True)
 
+    class Meta:
+        model = OrderItem
+        fields = ['id', 'product', 'quantity', 'price']
+        read_only_fields = ['product', 'price']
 
+class OrderSerializer(serializers.ModelSerializer):
+    items = OrderItemSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Order
+        fields = ['id', 'user', 'total_amount', 'status', 'created_at', 'items']
+        read_only_fields = ['user', 'total_amount', 'created_at', 'items']
