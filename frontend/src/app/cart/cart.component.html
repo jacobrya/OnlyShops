@@ -1,1 +1,25 @@
-<p>cart works!</p>
+<section>
+    <div class="cart-header">
+      <h2>Shopping Cart</h2>
+      <button (click)="clear()" [disabled]="cartItems.length == 0">Clear</button>
+    </div>
+  
+    <ng-container *ngIf="cartItems.length > 0; else emptyCart">
+      <app-cart-window *ngFor="let item of cartItems" [item]="item"
+        (removeItemEmitter)="removeFromCart(item.id)"
+        (increaseQuantityEmitter)="increaseQuantity(item.id)"
+        (decreaseQuantityEmitter)="decreaseQuantity(item.id)"
+        (quantityChangeEmitter)="onQuantityChange(item.id, $event)"
+      ></app-cart-window>
+    </ng-container>
+  
+    <ng-template #emptyCart>
+      <p>Your cart is empty.</p>
+    </ng-template>
+  
+    <div class="cart-footer">
+      <p>Total: {{ totalPrice | number:'1.2-2' }} ₸</p>
+      <button (click)="buy()" [disabled]="cartItems.length == 0">Buy</button>
+    </div>
+  </section>
+  

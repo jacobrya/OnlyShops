@@ -1,55 +1,98 @@
+:host {
+  display: block;
+  position: relative;
+  width: 100%;
+  background-color: #f4f4f4;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  height: 60px;
+}
+
 header {
-    background-color: #f8f9fa;
-    padding: 1rem;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    height: 30px; /* Increased height for better spacing */
-    display: flex;
-    justify-content: center; /* Center text horizontally */
-    align-items: center; /* Align items vertically */
-    position: fixed;
+  background-color: #f8f9fa;
+  padding: 0 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px; /* Increase the header height to make space for a larger logo */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  overflow: hidden; /* Prevent content from overflowing outside the header */
 }
 
 header h2 {
-    color: #6c757d;
-    font-size: 1.2rem;
-    font-weight: 400;
-    margin: 0;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%); /* Ensures text is truly centered */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
-    display: inline-block;
+header h2 a {
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
-a:hover {
-    text-decoration: none;
-    color: inherit;
-    transform: scale(1.05);
+header img {
+  height: 100%;  /* Fills the header height */
+  max-height: 100%;
+  width: auto;
+  padding-top: 0;
 }
 
-/* Logout Button on the Right */
+header img:hover {
+  transform: scale(1.05);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  display: flex;
+  align-items: center;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.2s ease-in-out, transform 0.2s;
+}
+
+nav a:hover {
+  color: #007bff;
+  transform: scale(1.05);
+}
+
 button {
-    position: absolute;
-    right: 20px;
-    background: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    padding: 8px 12px;
-    font-size: 14px;
-    transition: background 0.3s;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 8px 12px;
+  font-size: 14px;
+  transition: background 0.3s;
 }
 
 button:hover {
-    background: #c82333;
+  background: #c82333;
+}
+
+header img {
+  padding-top: 10px;
+  height: 150px;
+  width: auto;
+  max-height: 100%;
+  display: block;
 }

@@ -1,1 +1,10 @@
-<p>home works!</p>
+<section>
+    <h2 id="title">Interesting Products!</h2>
+  
+    <section class="products-container">
+      <div class="product-column" *ngFor="let product of products">
+        <app-product-window [product]="product"></app-product-window>
+      </div>
+    </section>
+  </section>
+  

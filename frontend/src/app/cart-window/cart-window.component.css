@@ -1,0 +1,106 @@
+section {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+  gap: 1rem;
+  background-color: #f9f9f9;
+}
+
+.cart-item-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.cart-item-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.cart-item-details h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.cart-item-details p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+/* General Button Styles */
+button {
+  background-color: #007bff; /* Solid "Onlyshops" blue */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: auto;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-right: 1rem;
+}
+
+button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+button:focus {
+  outline: none;
+  border: 2px solid #0056b3;
+}
+
+button:active {
+  background-color: #004085;
+  transform: scale(0.98);
+}
+
+/* Align buttons on opposite sides */
+.cart-item-actions {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+/* Individual button styling */
+.remove-button {
+  background-color: #dc3545; /* Red for Remove */
+}
+
+.remove-button:hover {
+  background-color: #c82333;
+}
+
+.decrease-button {
+  background-color: #ffc107; /* Yellow for Decrease */
+}
+
+.decrease-button:hover {
+  background-color: #e0a800;
+}
+
+.increase-button {
+  background-color: #28a745; /* Green for Increase */
+}
+
+.increase-button:hover {
+  background-color: #218838;
+}
+
+/* Input styling */
+input[type="number"] {
+  width: 60px;
+  padding: 0.5rem;
+  margin-left: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}

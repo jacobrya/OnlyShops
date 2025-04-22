@@ -1,1 +1,16 @@
-<p>signin works!</p>
+<section>
+    <h2>Register</h2>
+    <form [formGroup]="registerForm" (submit)="onSubmit()">
+        <label for="username">Username</label>
+        <input type="text" formControlName="username" id="username" placeholder="Username" required>
+
+        <label for="username">Email</label>
+        <input type="text" formControlName="email" id="email" placeholder="Email" required>
+
+        <label for="password">Password</label>
+        <input type="password" formControlName="password" id="password" placeholder="Username" required>
+
+        <a routerLink="/log-in">Already have an account?</a>
+        <button type="submit">Register</button>
+    </form>
+</section>

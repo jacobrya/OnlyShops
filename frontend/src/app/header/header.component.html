@@ -1,15 +1,17 @@
 <header>
     <h2>
-        <ng-container *ngIf="isLoggedIn; else noUser">
-            <a routerLink="/">
-                <strong>Shop</strong>
-            </a>
-        </ng-container>
-
-        <ng-template #noUser>
-            <strong>Shop</strong>
-        </ng-template>
+      <a routerLink="/home">
+        <img src="logo.png" alt="onlyshop logo" />
+      </a>
     </h2>
-
-    <button *ngIf="isLoggedIn" (click)="logOut()" type="button">Log Out</button>
+  
+    <nav>
+      <ul *ngIf="isLoggedIn">
+        <li><a routerLink="/category">Categories</a></li>
+        <li><a routerLink="/profile">Profile</a></li>
+        <li><a routerLink="/orders">My Orders</a></li>
+        <li><a routerLink="/cart">My Cart</a></li>
+        <li><button (click)="logOut()" type="button">Log Out</button></li>
+      </ul>
+    </nav>
 </header>

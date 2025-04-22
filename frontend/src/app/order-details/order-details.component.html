@@ -1,0 +1,15 @@
+<section class="order-details">
+    <h1>Order Detail</h1>
+    <p><strong>Order ID:</strong> {{ order.id }}</p>
+    <p><strong>Status:</strong> {{ order.status }}</p>
+    <p><strong>Order date:</strong> {{ order.created_at | date }}</p>
+    <p><strong>Total:</strong> {{ order.total_amount }} ₸</p>
+    <div>
+        <h3>Product List:</h3>
+        <ul *ngFor="let item of orderItems">
+            <li><a [routerLink]="['/product', item.product.id]">{{ item.product.title }}</a> | Price: {{ item.product.price }}₸</li>
+        </ul>
+    </div>
+
+  </section>
+  

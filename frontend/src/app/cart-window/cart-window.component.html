@@ -1,0 +1,20 @@
+<section class="cart-item">
+    <img [src]="item.product.image_url" alt="{{ item.product.title }}" class="cart-item-image" />
+  
+    <div class="cart-item-details">
+      <h3>{{ item.product.title }}</h3>
+      <p>Price: {{ item.product.price }} ₸</p>
+  
+      <label>
+        Quantity:
+        <input type="number" [(ngModel)]="item.quantity" (ngModelChange)="onQuantityChange(item)" min="1" [max]="item.product.stock" />
+      </label>
+  
+      <div class="cart-item-controls">
+        <button (click)="decreaseQuantity()">-</button>
+        <button (click)="increaseQuantity()">+</button>
+        <button (click)="removeFromCart()">Remove</button>
+      </div>
+    </div>
+  </section>
+  
