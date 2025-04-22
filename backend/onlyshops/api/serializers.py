@@ -26,6 +26,11 @@ class RegisterSerializer(serializers.ModelSerializer):
 class LoginSerializer(TokenObtainPairSerializer):
     pass
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'created_at']
+
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
@@ -33,7 +38,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True)
-    seller = serializers.StringRelatedField(read_only=True)
+    seller = UserSerializer(read_only=True)
     category_id = serializers.PrimaryKeyRelatedField(
             queryset=Category.objects.all(), source='category', write_only=True
         )
