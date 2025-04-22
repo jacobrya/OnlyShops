@@ -63,6 +63,11 @@ class CartSerializer(serializers.ModelSerializer):
         if request and request.user == data['product'].seller:
             raise serializers.ValidationError("You cannot add your own product to the cart.")
         return data
+    
+    def validate_quantity(self, value):
+        if value <= 0:
+            raise serializers.ValidationError("Quantity must be greater than zero.")
+        return value
 
 class OrderItemSerializer(serializers.ModelSerializer):
     product = ProductSerializer(read_only=True)
