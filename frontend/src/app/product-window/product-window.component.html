@@ -3,5 +3,6 @@
     <h2>{{ product.title }}</h2>
     <p>Price: {{ product.price }} ₸</p>
     <p>Description: {{ product.description }}</p>
+    <a [routerLink]="['/products', product.id]"><button>About</button></a>
     <button (click)="addToCart(product)">Add to Cart</button>
 </section>

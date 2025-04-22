@@ -19,4 +19,31 @@ export class ProductsService {
 
     return this.http.get<Product[]>(this.backendUrl, { params });
   }
+
+  getProduct(id: number): Observable<Product> {
+    return this.http.get<Product>(`${this.backendUrl}${id}/`);
+  }
+
+  addProduct(product: Product): Observable<Product> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.post<Product>(this.backendUrl, {
+        title: product.title,
+        description: product.description,
+        price: product.price,
+        image_url: product.image_url,
+        stock: product.stock,
+        category_id: product.category.id,
+    }, { headers }
+    );
+  }
+
+  updateProduct(id: number, product: Partial<Product>): Observable<Product> {
+    console.log('Updating product:', id, product);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.put<Product>(`${this.backendUrl}${id}/`, product, { headers });
+  }
 }

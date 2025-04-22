@@ -1,31 +1,20 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
+import { User } from './user';
 
-interface User {
-  userId: number;
-  username: string;
-  email?: string;
-}
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private userSubject = new BehaviorSubject<User | null>(this.getUserFromStorage());
-  user$ = this.userSubject.asObservable();
+  private backendUrl = 'http://127.0.0.1:8000/api/profile/';
 
-  setUser(user: User): void {
-    this.userSubject.next(user);
-    localStorage.setItem('user', JSON.stringify(user)); 
+  constructor(private http: HttpClient) { 
+    
   }
 
-  getUserFromStorage(): User | null {
-    const userData = localStorage.getItem('user');
-    return userData ? JSON.parse(userData) : null;
-  }
-
-  clearUser(): void {
-    this.userSubject.next(null);
-    localStorage.removeItem('user');
+  getUserInfo(): Observable<User> {
+    return this.http.get<User>(`${this.backendUrl}`);
   }
 }

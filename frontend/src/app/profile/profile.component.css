@@ -1,0 +1,62 @@
+.user-profile {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1rem;
+  }
+  
+  .user-profile h2 {
+    font-size: 2rem;
+    color: #222;
+    margin-bottom: 1rem;
+  }
+  
+  .profile-card {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  }
+  
+  .profile-card p {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 0.6rem;
+  }
+  
+    
+  .order-history {
+    margin-top: 15px;
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  }
+  
+  .order-history p {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 0.6rem;
+  }
+
+  footer {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #f1f1f1;
+    text-align: center;
+    border-top: 1px solid #ccc;
+    font-size: 0.95rem;
+  }
+  
+  footer a {
+    color: #007bff; /* OnlyShops blue */
+    text-decoration: none;
+    font-size: large;
+    font-weight: 800;
+    transition: color 0.2s ease;
+  }
+  
+  footer a:hover {
+    color: #0056b3; /* darker blue on hover */
+    text-decoration: underline;
+  }
+  

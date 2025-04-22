@@ -2,10 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ProductsService } from '../product.service';
 import { Product } from '../product';
 import { CartService } from '../cart.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-product-window',
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './product-window.component.html',
   styleUrl: './product-window.component.css'
 })

@@ -1,0 +1,29 @@
+<section class="user-products">
+  <div class="add-product">
+    <a routerLink="add" class="add-btn">➕ Add New Product</a>
+  </div>
+
+  <div class="orders">
+    <a routerLink="orders" class="add-btn">📦 Show Orders</a>
+  </div>
+
+  <div *ngIf="userProducts.length > 0; else noProducts" class="product-list">
+    <h2>Your Products</h2>
+
+    <div class="product-card" *ngFor="let product of userProducts">
+      <img [src]="product.image_url" alt="{{ product.title }}" class="product-img" />
+      <div class="product-details">
+        <h3>{{ product.title }}</h3>
+        <p><strong>Price:</strong> {{ product.price }} ₸</p>
+        <p>{{ product.description }}</p>
+        <a [routerLink]="['edit', product.id]" class="edit-btn">Edit</a>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noProducts>
+    <h2>Your Products</h2>
+    <p>You haven't added any products yet.</p>
+  </ng-template>
+</section>
+ 

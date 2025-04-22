@@ -17,7 +17,7 @@ export class TokenExpirationInterceptorService implements HttpInterceptor {
         if (error.status === 401) {
           console.warn("Unauthorized request, trying to refresh");
           const refresh_token: string | null = localStorage.getItem('refresh-token');
-          console.log("Refresh token", refresh_token);
+          // console.log("Refresh token", refresh_token);
 
           if (!refresh_token) {
             this.auth.logout();

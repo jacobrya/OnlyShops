@@ -1,1 +1,25 @@
-<p>category works!</p>
+<section class="category-filter">
+    <div class="filter-controls">
+      <label>
+        Category:
+        <select [(ngModel)]="selectedCategoryId">
+          <option [ngValue]="null">All</option>
+          <option *ngFor="let category of categories" [ngValue]="category.id">{{ category.name }}</option>
+        </select>
+      </label>
+  
+      <label>
+        Search:
+        <input type="text" [(ngModel)]="searchQuery" placeholder="Search by product name..." />
+      </label>
+    </div>
+  
+    <div class="product-list" *ngIf="filteredProducts().length > 0; else noResults">
+      <app-product-window *ngFor="let item of filteredProducts()" [product]="item"></app-product-window>
+    </div>
+  
+    <ng-template #noResults>
+      <p>No products match your search.</p>
+    </ng-template>
+  </section>
+  

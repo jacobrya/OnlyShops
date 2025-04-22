@@ -1,0 +1,59 @@
+.order-list {
+    padding: 2rem;
+    max-width: 900px;
+    margin: auto;
+  }
+  
+  .order-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: #f9f9f9;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  }
+  
+  .order-info h3 {
+    margin-bottom: 0.5rem;
+    color: #222;
+  }
+  
+  .order-info p {
+    margin: 0.2rem 0;
+    color: #555;
+  }
+  
+  .order-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .confirm {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .cancel {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .confirm:hover {
+    background-color: #388e3c;
+  }
+  
+  .cancel:hover {
+    background-color: #d32f2f;
+  }
+  

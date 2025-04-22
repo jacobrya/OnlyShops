@@ -1,0 +1,26 @@
+<section>
+    <p>Edit Product:</p>
+    <div class="product-card">
+      <img [src]="product.image_url" alt="{{ product.title }}" class="product-image" />
+      <div class="product-details">
+  
+        <label>
+          Title:
+          <input [(ngModel)]="product.title" name="title" (ngModelChange)="onFieldChange('title', $event)" />
+        </label>
+  
+        <label>
+          Price:
+          <input [(ngModel)]="product.price" name="price" type="number" (ngModelChange)="onFieldChange('price', $event)" />
+        </label>
+  
+        <label>
+          Stock:
+          <input [(ngModel)]="product.stock" name="stock" type="number" (ngModelChange)="onFieldChange('stock', $event)" />
+        </label>
+  
+        <button (click)="applyChanges()" [disabled]="!hasChanges()">Apply Changes</button>
+      </div>
+    </div>
+  </section>  
+  
