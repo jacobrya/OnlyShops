@@ -6,6 +6,7 @@ from .serializers import *
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.views import TokenRefreshView, TokenObtainPairView
 from django.db import transaction
+
 # Authentication Views
 class RegisterView(APIView):
     permission_classes = [AllowAny]
@@ -24,6 +25,25 @@ class LoginView(TokenObtainPairView):
 class RefreshTokenView(TokenRefreshView):
     permission_classes = [AllowAny]
 
+class UserProfileView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+    
+class UserProfileDetailView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, pk):
+        try:
+            user = User.objects.get(pk=pk)
+        except User.DoesNotExist:
+            return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+
 # Категории
 class CategoryListCreateView(APIView):
     permission_classes = [IsAuthenticated]
@@ -33,12 +53,12 @@ class CategoryListCreateView(APIView):
         serializer = CategorySerializer(categories, many=True)
         return Response(serializer.data)
 
-    def post(self, request):
-        serializer = CategorySerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    # def post(self, request):
+    #     serializer = CategorySerializer(data=request.data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class CategoryDetailView(APIView):
     permission_classes = [IsAuthenticated]
@@ -51,24 +71,24 @@ class CategoryDetailView(APIView):
         serializer = CategorySerializer(category)
         return Response(serializer.data)
 
-    def put(self, request, pk):
-        try:
-            category = Category.objects.get(pk=pk)
-        except Category.DoesNotExist:
-            return Response({'error': 'Category not found'}, status=status.HTTP_404_NOT_FOUND)
-        serializer = CategorySerializer(category, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    # def put(self, request, pk):
+    #     try:
+    #         category = Category.objects.get(pk=pk)
+    #     except Category.DoesNotExist:
+    #         return Response({'error': 'Category not found'}, status=status.HTTP_404_NOT_FOUND)
+    #     serializer = CategorySerializer(category, data=request.data, partial=True)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(serializer.data)
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk):
-        try:
-            category = Category.objects.get(pk=pk)
-        except Category.DoesNotExist:
-            return Response({'error': 'Category not found'}, status=status.HTTP_404_NOT_FOUND)
-        category.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    # def delete(self, request, pk):
+    #     try:
+    #         category = Category.objects.get(pk=pk)
+    #     except Category.DoesNotExist:
+    #         return Response({'error': 'Category not found'}, status=status.HTTP_404_NOT_FOUND)
+    #     category.delete()
+    #     return Response(status=status.HTTP_204_NO_CONTENT)
 
 # Продукты
 class ProductListCreateView(APIView):
@@ -158,6 +178,13 @@ class CartView(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
         except Cart.DoesNotExist:
             return Response({'error': 'Cart item not found'}, status=status.HTTP_404_NOT_FOUND)
+
+class CartClearView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request):
+        Cart.objects.filter(user=request.user).delete()
+        return Response({'message': 'Cart cleared'}, status=status.HTTP_204_NO_CONTENT)
 
 # Заказы
 class OrderCreateView(APIView):
