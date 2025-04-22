@@ -1,0 +1,9 @@
+<section>
+    <div class="item-details">
+        <h4>Order ID: {{ item.id }}</h4>
+        <p>Status: {{ item.status }}</p>
+        <p>Price: {{ item.total_amount }} ₸</p>
+        <p>Time: {{item.created_at | date }}</p>
+        <a [routerLink]="['/orders', item.id]">About</a>
+    </div>
+</section>

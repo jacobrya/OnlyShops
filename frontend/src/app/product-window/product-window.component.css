@@ -1,0 +1,70 @@
+/* Each product card */
+.product-window {
+  width: 220px;
+  height: 360px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+/* Hover effect */
+.product-window:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Product image */
+.product-window img {
+  height: 140px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Title */
+.product-window h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  color: #333;
+}
+
+/* Price */
+.product-window p:nth-of-type(1) {
+  color: #e64a19;
+  font-weight: 700;
+  margin-top: 0.4rem;
+}
+
+/* Description */
+.product-window p:nth-of-type(2) {
+  font-size: 0.9rem;
+  color: #666;
+  flex-grow: 1;
+  margin-top: 0.4rem;
+}
+
+/* Button */
+.product-window button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.2s;
+  margin-top: 0.5rem;
+}
+
+.product-window button:hover {
+  background-color: #388e3c;
+}

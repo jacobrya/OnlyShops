@@ -1,1 +1,13 @@
-<p>login works!</p>
+<section>
+    <h2>Login</h2>
+    <form [formGroup]="loginForm" (submit)="onSubmit()">
+        <label for="username">Username</label>
+        <input type="text" formControlName="username" id="username" placeholder="Username" required>
+
+        <label for="password">Password</label>
+        <input type="password" formControlName="password" id="password" placeholder="Username" required>
+
+        <a routerLink="/sign-in">Don`t have account yet?</a>
+        <button type="submit">Log in</button>
+    </form>
+</section>

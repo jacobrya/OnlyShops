@@ -1,0 +1,7 @@
+<section class="product-window">
+    <img [src]="product.image_url" alt="jokerge">
+    <h2>{{ product.title }}</h2>
+    <p>Price: {{ product.price }} ₸</p>
+    <p>Description: {{ product.description }}</p>
+    <button (click)="addToCart(product)">Add to Cart</button>
+</section>

@@ -1,0 +1,7 @@
+<section>
+    <h1>Your Orders:</h1>
+    <app-order-window
+        *ngFor="let item of orders"
+        [item]="item">
+    </app-order-window>
+</section>

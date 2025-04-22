@@ -1,0 +1,64 @@
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .cart-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+  }
+  
+  .cart-footer button {
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    background-color: #007bff; /* OnlyShops blue */
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .cart-footer button:disabled {
+    background-color: #a9a9a9;
+    cursor: not-allowed;
+  }
+  
+  .cart-footer button:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+  
+  .cart-header button {
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    background-color: #007bff; /* OnlyShops blue */
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .cart-header button:disabled {
+    background-color: #a9a9a9;
+    cursor: not-allowed;
+  }
+  
+  .cart-header button:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+  
+  .cart-footer p {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    background-color: #e9f3ff;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
