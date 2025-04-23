@@ -244,6 +244,21 @@ class OrderDetailView(APIView):
         serializer = OrderSerializer(order)
         return Response(serializer.data)
 
+class PendingSellerOrdersView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        pending_orders = Order.objects.filter(
+            items__product__seller=request.user,
+            status='pending'
+        ).distinct()
+        
+        serializer = OrderSerializer(pending_orders, many=True)
+        
+        return Response({
+            'pending_seller_orders': serializer.data
+        })
+
 class UserOrdersView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -252,7 +267,7 @@ class UserOrdersView(APIView):
         buyer_orders = Order.objects.filter(user=request.user)
         buyer_serializer = OrderSerializer(buyer_orders, many=True)
 
-        # Заказы как продавец (где продукты пользователя включены в заказы)
+        # Заказы как продавец
         seller_orders = Order.objects.filter(items__product__seller=request.user).distinct()
         seller_serializer = OrderSerializer(seller_orders, many=True)
 

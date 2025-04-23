@@ -18,4 +18,5 @@ urlpatterns = [
     path('orders/<int:pk>/', OrderDetailView.as_view(), name='order-detail'),
     path('user-orders/', UserOrdersView.as_view(), name='user-orders'),
     path('orders/<int:pk>/action/', OrderActionView.as_view(), name='order-action'),
+    path('seller/pending-orders/', PendingSellerOrdersView.as_view(), name='pending-seller-orders'),
 ]
