@@ -25,14 +25,21 @@ class LoginView(TokenObtainPairView):
 class RefreshTokenView(TokenRefreshView):
     permission_classes = [AllowAny]
 
-class UserProfileView(APIView):
-    permission_classes = [IsAuthenticated]
+# class UserProfileView(APIView):
+#     permission_classes = [IsAuthenticated]
 
-    def get(self, request):
-        user = request.user
-        serializer = UserSerializer(user)
-        return Response(serializer.data)
+#     def get(self, request):
+#         user = request.user
+#         serializer = UserSerializer(user)
+#         return Response(serializer.data)
     
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def user_profile_view(request):
+    user = request.user
+    serializer = UserSerializer(user)
+    return Response(serializer.data)
+
 class UserProfileDetailView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -179,12 +186,18 @@ class CartView(APIView):
         except Cart.DoesNotExist:
             return Response({'error': 'Cart item not found'}, status=status.HTTP_404_NOT_FOUND)
 
-class CartClearView(APIView):
-    permission_classes = [IsAuthenticated]
+# class CartClearView(APIView):
+#     permission_classes = [IsAuthenticated]
 
-    def delete(self, request):
-        Cart.objects.filter(user=request.user).delete()
-        return Response({'message': 'Cart cleared'}, status=status.HTTP_204_NO_CONTENT)
+#     def delete(self, request):
+#         Cart.objects.filter(user=request.user).delete()
+#         return Response({'message': 'Cart cleared'}, status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def cart_clear_view(request):
+    Cart.objects.filter(user=request.user).delete()
+    return Response({'message': 'Cart cleared'}, status=status.HTTP_204_NO_CONTENT)
 
 # Заказы
 class OrderCreateView(APIView):
