@@ -97,7 +97,16 @@ export class CartComponent implements OnInit {
   }
 
   clear(): void {
-    this.cartService.deleteAllFromCart().subscribe();
+    this.cartService.deleteAllFromCart().subscribe(
+      (response) => {
+        console.log('All items removed from cart:', response);
+      },
+      (error) => {
+        console.error('Error clearing cart:', error);
+        alert('Error clearing cart. Please try again later.');
+        return;
+      }
+    );
     this.cartItems = [];
     this.totalPrice = 0;
     console.log('Cart cleared');
@@ -112,6 +121,7 @@ export class CartComponent implements OnInit {
       },
       (error) => {
         console.error('Error creating order:', error);
+        alert('Error creating order. Please try again later.');
       }
     );
   }

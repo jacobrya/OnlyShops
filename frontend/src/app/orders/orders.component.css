@@ -2,3 +2,10 @@ h1 {
     color: #007BFF;
     text-align: center;
 }
+
+p {
+    text-align: center;
+    font-size: 1.2em;
+    margin: 20px;
+    padding: 10px;
+}

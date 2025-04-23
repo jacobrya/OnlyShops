@@ -27,6 +27,7 @@ export class ProfileComponent implements OnInit {
       },
       (error: any) => {
         console.error('Error fetching user data:', error);
+        alert('Error fetching user data. Please try again later.');
       }
     );
 
@@ -36,6 +37,7 @@ export class ProfileComponent implements OnInit {
       },
       (error: any) => {
         console.error('Error fetching orders:', error);
+        alert('Error fetching user order. Please try again later.');
       }
     );
   }

@@ -21,6 +21,7 @@ export class ProductWindowComponent {
       }),
       (error => {
         console.error('Error adding product to cart:', error);
+        alert('Error adding product to cart. Please try again later.');
       })
     )
   }

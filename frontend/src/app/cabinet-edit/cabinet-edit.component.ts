@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../product';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../product.service';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -38,6 +38,10 @@ export class CabinetEditComponent implements OnInit {
   applyChanges() {
     this.productService.updateProduct(this.product.id, this.changedFields).subscribe(() => {
       this.changedFields = {};
+    },
+    (error: any) => {
+      console.error('Error updating product:', error);
+      alert('Error updating product. Please try again later.');
     });
   }
 

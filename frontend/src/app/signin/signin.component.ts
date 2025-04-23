@@ -33,6 +33,9 @@ export class SigninComponent implements OnInit {
 
       (error) => {
         console.error(`error`, error)
+        if (error.error) {
+          alert(error.error.username? error.error.username[0] : error.error.email[0])
+        }
       }
     )
   }

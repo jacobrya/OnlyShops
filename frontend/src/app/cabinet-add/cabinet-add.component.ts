@@ -46,22 +46,34 @@ export class CabinetAddComponent implements OnInit  {
       },
       (error) => {
         console.error('Error adding product:', error);
+        alert('Error adding product. Please try again later.');
       }
     );
   }
 
   onSubmit() {
     if (this.prodForm.valid) {
+      const categoryId = this.prodForm.value.category_id;
+      const categoryName = this.categories.find(cat => cat.id === categoryId)?.name || '';
+  
       const product: Product = {
-        ...this.prodForm.value,
+        id: 0,
+        title: this.prodForm.value.title,
+        description: this.prodForm.value.description,
+        price: this.prodForm.value.price,
+        image_url: this.prodForm.value.image_url,
+        stock: this.prodForm.value.stock,
         category: {
-          id: this.prodForm.value.category_id,
-          name: this.categories.find(cat => cat.id === this.prodForm.value.category_id)?.name || ''
-        }
+          id: categoryId,
+          name: categoryName
+        },
+        seller: {} as any,
+        created_at: new Date().toISOString()
       };
+  
       this.addProduct(product);
     } else {
       console.log('Form is invalid');
     }
-  }
+  }  
 }

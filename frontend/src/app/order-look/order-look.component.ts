@@ -31,6 +31,7 @@ export class OrderLookComponent implements OnInit {
       () => this.loadOrders(),
       (error) => {
         console.error('Error confirming order:', error);
+        alert('Error confirming order. Please try again later.');
       }
     );
   }
@@ -40,6 +41,7 @@ export class OrderLookComponent implements OnInit {
       () => this.loadOrders(),
       (error) => {
         console.error('Error confirming order:', error);
+        alert('Error cancelling order. Please try again later.');
       }
     );
   }

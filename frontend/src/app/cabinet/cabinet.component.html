@@ -17,8 +17,9 @@
         <p><strong>Price:</strong> {{ product.price }} ₸</p>
         <p>{{ product.description }}</p>
         <a [routerLink]="['edit', product.id]" class="edit-btn">Edit</a>
+        <button (click)="removeProduct(product.id)" class="remove-btn">🗑 Remove</button>
       </div>
-    </div>
+    </div>    
   </div>
 
   <ng-template #noProducts>

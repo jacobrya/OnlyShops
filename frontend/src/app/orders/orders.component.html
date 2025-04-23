@@ -1,7 +1,11 @@
 <section>
     <h1>Your Orders:</h1>
-    <app-order-window
+    <p *ngIf="orders.length === 0 else noOrder">No orders found.</p>
+    <ng-template #noOrder>
+        <app-order-window
         *ngFor="let item of orders"
-        [item]="item">
+        [item]="item"
+        >
     </app-order-window>
+    </ng-template>
 </section>

@@ -97,3 +97,21 @@
     margin-bottom: 1.5rem;
   }
   
+.remove-btn {
+  display: inline-block;
+  margin-top: 0.7rem;
+  margin-left: 0.8rem;
+  background-color: #e53935;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.remove-btn:hover {
+  background-color: #c62828;
+}

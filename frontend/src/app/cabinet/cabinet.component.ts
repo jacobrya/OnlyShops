@@ -38,7 +38,24 @@ export class CabinetComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching products:', error);
+        alert('Error fetching products. Please try again later.');
       }
     );
   }
+
+  removeProduct(productId: number): void {
+    if (confirm('Are you sure you want to remove this product?')) {
+      this.productService.deleteProduct(productId).subscribe(
+        () => {
+          this.userProducts = this.userProducts.filter(p => p.id !== productId);
+          console.log(`Product ${productId} removed successfully.`);
+        },
+        (error) => {
+          console.error('Error removing product:', error);
+          alert('Failed to remove the product. Try again later.');
+        }
+      );
+    }
+  }
+  
 }

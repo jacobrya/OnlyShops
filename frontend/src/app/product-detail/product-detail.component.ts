@@ -37,6 +37,7 @@ export class ProductDetailComponent implements OnInit {
       }),
       (error => {
         console.error('Error adding product to cart:', error);
+        alert('Error adding product to cart. Please try again later.');
       })
     )
   }

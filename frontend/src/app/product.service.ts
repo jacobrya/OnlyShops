@@ -46,4 +46,8 @@ export class ProductsService {
     });
     return this.http.put<Product>(`${this.backendUrl}${id}/`, product, { headers });
   }
+
+  deleteProduct(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.backendUrl}${id}/`);
+  }
 }
