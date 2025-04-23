@@ -1,0 +1,21 @@
+<section class="order-list" *ngIf="orders.length > 0; else noOrders">
+    <div *ngFor="let order of orders" class="order-card">
+      <div class="order-info">
+        <h3>Order #{{ order.id }}</h3>
+        <p><strong>Customer:</strong> {{ order.user }}</p>
+        <p><strong>Total:</strong> {{ order.total_amount }} ₸</p>
+        <p><strong>Status:</strong> {{ order.status }}</p>
+        <p><strong>Date:</strong> {{ order.created_at | date:'medium' }}</p>
+      </div>
+  
+      <div class="order-actions">
+        <button class="confirm" (click)="confirmOrder(order.id)">Confirm</button>
+        <button class="cancel" (click)="cancelOrder(order.id)">Cancel</button>
+      </div>
+    </div>
+  </section>
+  
+  <ng-template #noOrders>
+    <p>No orders found.</p>
+  </ng-template>
+  

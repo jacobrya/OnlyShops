@@ -1,0 +1,40 @@
+<section>
+  <form [formGroup]="prodForm" (ngSubmit)="onSubmit()">
+    <label>
+      Title:
+      <input formControlName="title" />
+    </label>
+
+    <label>
+      Description:
+      <textarea formControlName="description" rows="4"></textarea>
+    </label>
+
+    <label>
+      Price:
+      <input type="number" formControlName="price" />
+    </label>
+
+    <label>
+      Image URL:
+      <input formControlName="image_url" />
+    </label>
+
+    <label>
+      Stock:
+      <input type="number" formControlName="stock" />
+    </label>
+
+    <label>
+      Category:
+      <select formControlName="category_id">
+        <option [ngValue]="null">-- Select Category --</option>
+        <option *ngFor="let category of categories" [ngValue]="category.id">
+          {{ category.name }}
+        </option>
+      </select>
+    </label>
+
+    <button type="submit" [disabled]="!prodForm.valid">Add Product</button>
+  </form>
+</section>

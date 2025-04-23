@@ -27,11 +27,12 @@ export class LoginComponent implements OnInit {
         console.log("logged in")
 
         this.router.navigate(["/home"])
-        alert("hello")
+        alert("Welcome!")
       },
 
       (error) => {
         console.error(`error`, error)
+        alert("Invalid username or password")
       }
     )
   }

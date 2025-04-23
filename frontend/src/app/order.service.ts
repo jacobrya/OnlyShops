@@ -23,4 +23,14 @@ export class OrderService {
   getOrderById(id: number): Observable<Order> {
     return this.http.get<Order>(`${this.backendUrl}${id}/`);
   }
+
+  postAction(id: number, action: string): Observable<Order> {
+    return this.http.post<Order>(`${this.backendUrl}${id}/action/`, 
+      { action }
+    );
+  }
+
+  getSellerOrders(): Observable<Order[]> {
+    return this.http.get<Order[]>(`http://127.0.0.1:8000/api/user-orders`);
+  }
 }

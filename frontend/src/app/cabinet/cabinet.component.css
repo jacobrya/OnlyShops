@@ -1,0 +1,117 @@
+/* Fix for header overlap if you have a fixed header */
+.user-products {
+    padding: 5rem 2rem 2rem; /* Top padding adjusted */
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fefefe;
+  }
+  
+  /* Add Product button styling */
+  .add-product {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 1.5rem;
+  }
+  
+  .add-btn {
+    background-color: #1976d2; /* OnlyShops blue */
+    color: white;
+    padding: 0.7rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-btn:hover {
+    background-color: #1565c0;
+  }
+  
+  /* Product list title */
+  .product-list h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  /* Product card layout */
+  .product-card {
+    display: flex;
+    background-color: #fafafa;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    margin-bottom: 1.2rem;
+    align-items: center;
+    gap: 1.2rem;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Product image */
+  .product-img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+  
+  /* Product details text */
+  .product-details {
+    flex: 1;
+  }
+  
+  .product-details h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #222;
+  }
+  
+  .product-details p {
+    margin: 0.3rem 0;
+    color: #555;
+  }
+  
+  /* Edit button styling */
+  .edit-btn {
+    display: inline-block;
+    margin-top: 0.7rem;
+    background-color: #4caf50;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+  }
+  
+  .edit-btn:hover {
+    background-color: #388e3c;
+  }
+  
+  .orders {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 1.5rem;
+  }
+  
+.remove-btn {
+  display: inline-block;
+  margin-top: 0.7rem;
+  margin-left: 0.8rem;
+  background-color: #e53935;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.remove-btn:hover {
+  background-color: #c62828;
+}

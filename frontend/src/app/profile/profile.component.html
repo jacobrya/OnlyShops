@@ -1,1 +1,29 @@
-<p>profile works!</p>
+<section class="user-profile">
+  
+    <div class="profile-card">
+        <h2>User Profile</h2>
+        <p><strong>ID:</strong> {{ user.id }}</p>
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Registered on:</strong> {{ user.created_at | date: 'longDate' }}</p>
+      
+        <a routerLink="/cabinet" class="cabinet-link">Go to Cabinet</a>
+    </div>
+      
+
+    <div class="order-history">
+        <h2>Order History</h2>
+        <p *ngIf="orders.length === 0 else orderExists">No orders found.</p>
+        <ng-template #orderExists>
+            <ul>
+                <li *ngFor="let order of orders">
+                    <p><strong>Order ID:</strong> {{ order.id }}</p>
+                    <p><strong>Date:</strong> {{ order.created_at| date: 'short' }}</p>
+                    <p><strong>Total:</strong> {{ order.total_amount }} ₸</p>
+                    <a [routerLink]="['/orders', order.id]">More</a>
+                </li>
+            </ul>
+        </ng-template>
+    </div>
+</section>
+<footer><a routerLink="/about">About Us</a></footer>  

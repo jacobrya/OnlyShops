@@ -12,7 +12,7 @@ export class TokenAttachIntercepterService implements HttpInterceptor {
     }    
     
     const token = localStorage.getItem("access-token");
-    console.log("TokenAttachIntercepterService: ", token);
+    // console.log("TokenAttachIntercepterService: ", token);
 
     const authReq = token 
       ? req.clone({ setHeaders: { Authorization: `Bearer ${token}` } }) 

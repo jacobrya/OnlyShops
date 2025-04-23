@@ -1,0 +1,21 @@
+<section class="product-detail" *ngIf="product">
+    <div class="product-image-wrapper">
+      <img [src]="product.image_url" alt="{{ product.title }}" />
+    </div>
+  
+    <div class="product-info">
+      <h1>{{ product.title }}</h1>
+      <p class="price">Price: {{ product.price }} ₸</p>
+      <p class="stock">In stock: {{ product.stock }}</p>
+      <p class="description" *ngIf="product.description">{{ product.description }}</p>
+  
+      <div class="meta">
+        <p><strong>Category:</strong> {{ product.category.name }}</p>
+        <p><strong>Seller:</strong> {{ product.seller.username }}</p>
+        <p><strong>Created at:</strong> {{ product.created_at | date:'medium' }}</p>
+      </div>
+  
+      <button class="buy-button" (click)="addToCart(product)">Add to Cart</button>
+    </div>
+  </section>
+  
