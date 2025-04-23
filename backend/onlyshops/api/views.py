@@ -7,7 +7,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.views import TokenRefreshView, TokenObtainPairView
 from django.db import transaction
 
-# Authentication Views
+
 class RegisterView(APIView):
     permission_classes = [AllowAny]
 
@@ -25,13 +25,6 @@ class LoginView(TokenObtainPairView):
 class RefreshTokenView(TokenRefreshView):
     permission_classes = [AllowAny]
 
-# class UserProfileView(APIView):
-#     permission_classes = [IsAuthenticated]
-
-#     def get(self, request):
-#         user = request.user
-#         serializer = UserSerializer(user)
-#         return Response(serializer.data)
     
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -51,7 +44,7 @@ class UserProfileDetailView(APIView):
         serializer = UserSerializer(user)
         return Response(serializer.data)
 
-# Категории
+
 class CategoryListCreateView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -60,12 +53,6 @@ class CategoryListCreateView(APIView):
         serializer = CategorySerializer(categories, many=True)
         return Response(serializer.data)
 
-    # def post(self, request):
-    #     serializer = CategorySerializer(data=request.data)
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
-    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class CategoryDetailView(APIView):
     permission_classes = [IsAuthenticated]
@@ -78,26 +65,6 @@ class CategoryDetailView(APIView):
         serializer = CategorySerializer(category)
         return Response(serializer.data)
 
-    # def put(self, request, pk):
-    #     try:
-    #         category = Category.objects.get(pk=pk)
-    #     except Category.DoesNotExist:
-    #         return Response({'error': 'Category not found'}, status=status.HTTP_404_NOT_FOUND)
-    #     serializer = CategorySerializer(category, data=request.data, partial=True)
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return Response(serializer.data)
-    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    # def delete(self, request, pk):
-    #     try:
-    #         category = Category.objects.get(pk=pk)
-    #     except Category.DoesNotExist:
-    #         return Response({'error': 'Category not found'}, status=status.HTTP_404_NOT_FOUND)
-    #     category.delete()
-    #     return Response(status=status.HTTP_204_NO_CONTENT)
-
-# Продукты
 class ProductListCreateView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -150,7 +117,7 @@ class ProductDetailView(APIView):
         product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-# Корзина
+
 class CartView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -186,12 +153,6 @@ class CartView(APIView):
         except Cart.DoesNotExist:
             return Response({'error': 'Cart item not found'}, status=status.HTTP_404_NOT_FOUND)
 
-# class CartClearView(APIView):
-#     permission_classes = [IsAuthenticated]
-
-#     def delete(self, request):
-#         Cart.objects.filter(user=request.user).delete()
-#         return Response({'message': 'Cart cleared'}, status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
@@ -199,7 +160,6 @@ def cart_clear_view(request):
     Cart.objects.filter(user=request.user).delete()
     return Response({'message': 'Cart cleared'}, status=status.HTTP_204_NO_CONTENT)
 
-# Заказы
 class OrderCreateView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -209,21 +169,20 @@ class OrderCreateView(APIView):
         if not cart_items:
             return Response({'error': 'Cart is empty'}, status=status.HTTP_400_BAD_REQUEST)
 
-        # Проверка, что в корзине нет продуктов текущего пользователя
+   
         for item in cart_items:
             if item.product.seller == request.user:
                 return Response({'error': f'You cannot purchase your own product: {item.product.title}'}, status=status.HTTP_400_BAD_REQUEST)
 
         total_amount = sum(item.product.price * item.quantity for item in cart_items)
 
-        # Создание заказа без уменьшения запаса
         order = Order.objects.create(
             user=request.user,
             total_amount=total_amount,
             status='pending'
         )
 
-        # Перенос элементов корзины в заказ
+
         for item in cart_items:
             OrderItem.objects.create(
                 order=order,
@@ -232,7 +191,7 @@ class OrderCreateView(APIView):
                 price=item.product.price
             )
 
-        # Очистка корзины
+
         cart_items.delete()
 
         serializer = OrderSerializer(order)
@@ -276,11 +235,11 @@ class UserOrdersView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        # Заказы как покупатель
+    
         buyer_orders = Order.objects.filter(user=request.user)
         buyer_serializer = OrderSerializer(buyer_orders, many=True)
 
-        # Заказы как продавец
+     
         seller_orders = Order.objects.filter(items__product__seller=request.user).distinct()
         seller_serializer = OrderSerializer(seller_orders, many=True)
 
@@ -299,7 +258,6 @@ class OrderActionView(APIView):
         except Order.DoesNotExist:
             return Response({'error': 'Order not found'}, status=status.HTTP_404_NOT_FOUND)
 
-        # Проверка, что пользователь является продавцом хотя бы одного продукта в заказе
         is_seller = order.items.filter(product__seller=request.user).exists()
         if not is_seller:
             return Response({'error': 'You are not the seller for any products in this order'}, status=status.HTTP_403_FORBIDDEN)
@@ -312,7 +270,7 @@ class OrderActionView(APIView):
             return Response({'error': f'Order is already {order.status}'}, status=status.HTTP_400_BAD_REQUEST)
 
         if action == 'confirm':
-            # Проверка запаса и уменьшение
+
             for item in order.items.all():
                 if item.product.stock < item.quantity:
                     return Response({'error': f'Insufficient stock for {item.product.title}'}, status=status.HTTP_400_BAD_REQUEST)
